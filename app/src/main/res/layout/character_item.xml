@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:maxHeight="15sp"
+            android:maxWidth="15sp"
+             />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:orientation="vertical"
+
+                android:layout_weight="0.80"
+                android:padding="12sp">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:typeface="sans" />
+
+                <TextView
+                    android:id="@+id/nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/name"
+                    android:layout_marginTop="8dip"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:typeface="sans" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgHeart"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:layout_weight="0.20"
+                android:layout_marginVertical="5dp"
+
+                app:srcCompat="@drawable/heartfullf" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
