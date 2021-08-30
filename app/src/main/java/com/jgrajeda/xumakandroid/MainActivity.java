@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgrajeda.xumakandroid.classes.Character;
 import com.jgrajeda.xumakandroid.classes.CharacterAdapter;
@@ -29,12 +32,17 @@ public class MainActivity extends AppCompatActivity {
     ListView list;
     ArrayList<Character> characters = new ArrayList<>();
     CharacterAdapter adapter;
+    TextView txtNI;
+    Button btnReintentar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Breaking Bad Characters");
         setContentView(R.layout.activity_main);
+        txtNI = (TextView) this.findViewById(R.id.txtInternet);
+        btnReintentar = (Button) this.findViewById(R.id.btnReintentar);
         getCharactersAPI(this);
+
 
     }
 
@@ -42,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getCharacters(null);
+    }
+
+    public void reintentar(View target){
+        Log.i("I", "Reintentar");
+        getCharactersAPI(this);
     }
 
     private void getCharacters(Context context){
@@ -83,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Character>>() {
             @Override
             public void onResponse(Call<List<Character>> call, Response<List<Character>> response) {
+                txtNI.setVisibility(View.GONE);
+                btnReintentar.setVisibility(View.GONE);
                 for(Character character : response.body()) {
                     dp.saveCharacter(character);
                 }
@@ -91,6 +106,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Character>> call, Throwable t) {
+                Log.i("ERROR INTERNET", "Sin acceso a internet");
+                txtNI.setVisibility(View.VISIBLE);
+                btnReintentar.setVisibility(View.VISIBLE);
+                Toast.makeText(context, "Parece que no tienes acceso a internet por favor conéctate a una red e intenta abrir nuevamente la aplicación", Toast.LENGTH_LONG);
             }
         });
     }
